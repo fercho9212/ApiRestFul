@@ -1,0 +1,23 @@
++--------+-----------+--------------------------------+--------------------+-------------------------------------------------------------+------------+
+| Domain | Method    | URI                            | Name               | Action                                                      | Middleware |
++--------+-----------+--------------------------------+--------------------+-------------------------------------------------------------+------------+
+|        | GET|HEAD  | api/buyers/{buyer}             | buyers.show        | App\Http\Controllers\Buyer\BuyerControler@show              | api        |
+|        | GET|HEAD  | api/categories                 | categories.index   | App\Http\Controllers\Category\CategoryControler@index       | api        |
+|        | POST      | api/categories                 | categories.store   | App\Http\Controllers\Category\CategoryControler@store       | api        |
+|        | GET|HEAD  | api/categories/create          | categories.create  | App\Http\Controllers\Category\CategoryControler@create      | api        |
+|        | GET|HEAD  | api/categories/{category}      | categories.show    | App\Http\Controllers\Category\CategoryControler@show        | api        |
+|        | PUT|PATCH | api/categories/{category}      | categories.update  | App\Http\Controllers\Category\CategoryControler@update      | api        |
+|        | DELETE    | api/categories/{category}      | categories.destroy | App\Http\Controllers\Category\CategoryControler@destroy     | api        |
+|        | GET|HEAD  | api/categories/{category}/edit | categories.edit    | App\Http\Controllers\Category\CategoryControler@edit        | api        |
+|        | GET|HEAD  | api/products                   | products.index     | App\Http\Controllers\Product\ProductControler@index         | api        |
+|        | GET|HEAD  | api/products/{product}         | products.show      | App\Http\Controllers\Product\ProductControler@show          | api        |
+|        | GET|HEAD  | api/sellers                    | sellers.index      | App\Http\Controllers\Seller\SellerControler@index           | api        |
+|        | GET|HEAD  | api/sellers/{seller}           | sellers.show       | App\Http\Controllers\Seller\SellerControler@show            | api        |
+|        | GET|HEAD  | api/transactions               | transactions.index | App\Http\Controllers\Transaction\TransactionControler@index | api        |
+|        | GET|HEAD  | api/transactions/{transaction} | transactions.show  | App\Http\Controllers\Transaction\TransactionControler@show  | api        |
+|        | GET|HEAD  | api/users                      | users.index        | App\Http\Controllers\User\UserControler@index               | api        |
+|        | POST      | api/users                      | users.store        | App\Http\Controllers\User\UserControler@store               | api        |
+|        | GET|HEAD  | api/users/{user}               | users.show         | App\Http\Controllers\User\UserControler@show                | api        |
+|        | PUT|PATCH | api/users/{user}               | users.update       | App\Http\Controllers\User\UserControler@update              | api        |
+|        | DELETE    | api/users/{user}               | users.destroy      | App\Http\Controllers\User\UserControler@destroy             | api        |
++--------+-----------+--------------------------------+--------------------+-------------------------------------------------------------+------------+
