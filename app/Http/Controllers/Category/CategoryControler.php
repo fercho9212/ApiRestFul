@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Category;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryControler extends Controller
 {
@@ -14,7 +15,7 @@ class CategoryControler extends Controller
      */
     public function index()
     {
-        //
+        echo 'dasdas';
     }
 
     /**
@@ -33,9 +34,9 @@ class CategoryControler extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        
     }
 
     /**

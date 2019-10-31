@@ -1,6 +1,7 @@
 +--------+-----------+--------------------------------+--------------------+-------------------------------------------------------------+------------+
 | Domain | Method    | URI                            | Name               | Action                                                      | Middleware |
 +--------+-----------+--------------------------------+--------------------+-------------------------------------------------------------+------------+
+|        | GET|HEAD  | /                              |                    | Closure                                                     | web        |
 |        | GET|HEAD  | api/buyers/{buyer}             | buyers.show        | App\Http\Controllers\Buyer\BuyerControler@show              | api        |
 |        | GET|HEAD  | api/categories                 | categories.index   | App\Http\Controllers\Category\CategoryControler@index       | api        |
 |        | POST      | api/categories                 | categories.store   | App\Http\Controllers\Category\CategoryControler@store       | api        |
