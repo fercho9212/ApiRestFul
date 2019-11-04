@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 
 class UserControler extends Controller
@@ -14,7 +16,9 @@ class UserControler extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::all();
+        return response()->json(['data'=>$usuarios],200);
+        //return $usuarios;
     }
 
     /**
@@ -22,10 +26,7 @@ class UserControler extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -33,9 +34,11 @@ class UserControler extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $campos     =$request->all(); //Obtiene todos los campos
+        $usuario    = User::create($campos);
+        return response()->json(['data'=>$usuario],201);
     }
 
     /**
@@ -46,19 +49,10 @@ class UserControler extends Controller
      */
     public function show($id)
     {
-        //
+        $usuario=User::findOrFail($id);
+        return response()->json(['data'=>$usuario],200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

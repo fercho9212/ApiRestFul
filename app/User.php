@@ -15,6 +15,8 @@ class User extends Authenticatable
 
     const USUARIO_ADMINISTRADOR =   'true';
     const USUARIO_REGULAR       =   'false';
+
+    protected $table ='users';
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +26,7 @@ class User extends Authenticatable
         'name', 
         'email', 
         'password',
-        'verification',
+        'verified',
         'verification_token',
         'admin',
     ];
@@ -37,7 +39,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 
         'remember_token',
-        'verifica'
+        'verification'
     ];
 
     public function esVerificado(){
@@ -47,7 +49,7 @@ class User extends Authenticatable
         return $this->admin=User::USUARIO_ADMINISTRADOR;
     }
     public static function generarVerificacionToken(){
-        return str_ramdom(40);
+        return str_random(40);
     }
     /**
      * The attributes that should be cast to native types.

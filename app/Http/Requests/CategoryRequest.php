@@ -32,7 +32,7 @@ class CategoryRequest extends FormRequest
             'estado'=>'required|'.Rule::in(['on'])
         ];
     }
-
+/*
     public function messages(){
         return [
             'required'=>'El campo :atribute es requerido',
@@ -40,4 +40,5 @@ class CategoryRequest extends FormRequest
             'in'=>'The :attribute must be one of the following types: :values'
         ];
     }
+ */
 }

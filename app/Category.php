@@ -2,7 +2,7 @@
 
 namespace App;
 use App\product;
-use IlluminatecDatabase\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
