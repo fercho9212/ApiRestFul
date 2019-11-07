@@ -37,6 +37,9 @@ class UserControler extends Controller
     public function store(UserRequest $request)
     {
         $campos     =$request->all(); //Obtiene todos los campos
+        $campos['password']             = bcrypt($request->password);
+        $campos['verified']             = User::USUARIO_NO_VERIFICADO;
+        $campos['cerification_token']   = User::USUARIO_REGULAR;
         $usuario    = User::create($campos);
         return response()->json(['data'=>$usuario],201);
     }
@@ -61,9 +64,35 @@ class UserControler extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $user=User::findOrFail($id);
+        if($request->has('name')){
+            $user->name=$request->name;
+        }
+        if($request->has('email') && $user->mail != $request->email){
+            $user->verified             =User::USUARIO_NO_VERIFICADO;
+            $user->verification_token   =User::generarVerificacionToken();
+            $user->email=$request->email;
+        }
+        if($request->has('password')){
+            $user->password=bcrypt($request->password);
+        }
+        if($request->has('admin')){
+           if(!$user->esVerificado()){
+               return response()->json(['error'=>'Unicamente los usuarios
+                                                 verificados pueden cambiar el valor',
+                                                  'code'=>409],409);
+           }
+           $user->admin=$request->admin;
+        }
+        if(!$user->isDirty()){// Dirty se se realizaron cambios
+            return response()->json(['error'=>'Se debe Espicificar una valor 
+                                                diferente','code'=>422],422);
+
+        }
+        $user->save();
+        return response()->json(['data'=>$user]);
     }
 
     /**
@@ -74,6 +103,8 @@ class UserControler extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::findOrFail($id);
+        $user->delete();
+        return response()->json(['data'=>$user],200);
     }
 }
