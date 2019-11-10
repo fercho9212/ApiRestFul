@@ -18,10 +18,9 @@ class BuyerControler extends ApiController
         $compradores=Buyer::has('transactions')->get();  //has recibe el nombre de la relacion
         return $this->showAll($compradores);
     }
-    public function show($id)
-    {
-        $compradores=Buyer::has('transactions')->findOrFail($id);  //has recibe el nombre de la relacion
-        return $this->showOne($compradores);
+    public function show(Buyer $buyer)
+    {  //has recibe el nombre de la relacion
+        return $this->showOne($buyer);
     }
  
 }

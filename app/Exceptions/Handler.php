@@ -101,9 +101,9 @@ class Handler extends ExceptionHandler
             }
         }
 
-        if(config('app.debug')){
+/*         if(config('app.debug')){
             return $this->errorResponse('Falla Inesperada. Intente más adelante',500);
-        }
+        } */
         return parent::render($request, $exception);
     }
 

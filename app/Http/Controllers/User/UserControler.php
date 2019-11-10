@@ -43,10 +43,9 @@ class UserControler extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $usuario=User::findOrFail($id);
-        return $this->showOne($usuario);
+        return $this->showOne($user);
     }
 
 
@@ -57,9 +56,8 @@ class UserControler extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        $user=User::findOrFail($id);
         if($request->has('name')){
             $user->name=$request->name;
         }
@@ -92,9 +90,8 @@ class UserControler extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user=User::findOrFail($id);
         $user->delete();
         return $this->showOne($user);
     }
