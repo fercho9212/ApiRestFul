@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         User::truncate();
         Transaction::truncate(); */
         // $this->call(UsersTableSeeder::class);
-        $cantidadUsuarios       = 500;
+        $cantidadUsuarios       = 1000;
         $cantidadCategories     = 50;
         $cantidadProducts       = 1000;
         $cantidadTransacciones  = 1000;

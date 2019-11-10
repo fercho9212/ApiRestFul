@@ -19,7 +19,8 @@ use Illuminate\Http\Request;
 /**  
  * Buyer
 */
-Route::resource('buyers','Buyer\BuyerControler',['only'=>'show']);
+
+Route::resource('buyers','Buyer\BuyerControler',['only'=>['index','show']]);
 /** 
  * Categories
 */
