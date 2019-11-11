@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Category;
 
+use App\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\Category\CategoryRequest;
+use App\Http\Controllers\ApiController;
 
-class CategoryControler extends Controller
+class CategoryController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,8 @@ class CategoryControler extends Controller
      */
     public function index()
     {
-        echo 'dasdas';
+        $category = Category::all();
+        return $this->showAll($category);
     }
 
     /**
@@ -36,27 +38,28 @@ class CategoryControler extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        
+        $category=Category::create($request->all());
+        return $this->showOne($category,201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return $this->showOne($category);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
         //
     }
@@ -65,22 +68,32 @@ class CategoryControler extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $category->fill($request->all());
+
+        if($category->isClean()){
+            return $this->errorResponse('Desbe especificar al menos un valor diferente para actualizar',422);
+        }
+
+        $category->save();
+
+        return $this->showOne($category);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return $this->showOne($category);
     }
 }

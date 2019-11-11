@@ -24,7 +24,7 @@ Route::resource('buyers','Buyer\BuyerControler',['only'=>['index','show']]);
 /** 
  * Categories
 */
-Route::resource('categories','Category\CategoryControler',['exept'=>['create','edit']]);
+Route::resource('categories','Category\CategoryController',['exept'=>['create','edit']]);
 
 /**  
  * Products

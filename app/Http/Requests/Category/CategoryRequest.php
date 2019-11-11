@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -28,17 +28,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name' =>'required',
-            'description'=>'required|min:3|'.Rule::in(['first-zone', 'second-zone']),
-            'estado'=>'required|'.Rule::in(['on'])
+            'description'=>'required|min:3'
         ];
     }
-/*
-    public function messages(){
-        return [
-            'required'=>'El campo :atribute es requerido',
-            'min'=>'El campo debe tener 3',
-            'in'=>'The :attribute must be one of the following types: :values'
-        ];
-    }
- */
 }
