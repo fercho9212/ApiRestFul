@@ -29,7 +29,7 @@ Route::resource('categories','Category\CategoryController',['exept'=>['create','
 /**  
  * Products
 */
-Route::resource('products','Product\ProductControler',['only'=>['index','show']]);
+Route::resource('products','Product\ProductController',['only'=>['index','show']]);
 
 /**
  * Transactions
