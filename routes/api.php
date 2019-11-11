@@ -34,7 +34,7 @@ Route::resource('products','Product\ProductController',['only'=>['index','show']
 /**
  * Transactions
  */
-Route::resource('transactions','Transaction\TransactionControler',['only'=>['index','show']]);
+Route::resource('transactions','Transaction\TransactionController',['only'=>['index','show']]);
 
 /**
  * Sellers
