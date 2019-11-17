@@ -29,6 +29,10 @@ Route::resource('buyers.categories', 'Buyer\BuyerCategoryController',['only'=>['
  * Categories
 */
 Route::resource('categories','Category\CategoryController',['exept'=>['create','edit']]);
+Route::resource('categories.products', 'Category\CategoryProductController',['only'=>['index']]);
+Route::resource('categories.sellers', 'Category\CategorySellerController',['only'=>['index']]);
+Route::resource('categories.transactions','Category\CategoryTransationController',['only'=>'index']);
+Route::resource('categories.buyers','Category\CategoryBuyerController',['only'=>'index']);
 
 /**  
  * Products

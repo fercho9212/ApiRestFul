@@ -14,6 +14,9 @@ class Category extends Model
         'name',
         'description'
     ];
+    protected $hidden =[
+        'pivot'
+    ];
     protected $dates = ['deleted_at'];
     public function products()
     {
