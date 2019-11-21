@@ -3,6 +3,7 @@
 namespace App;
 use App\Seller;
 use App\Category;
+use Carbon\Carbon;
 use App\Transaction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,8 +13,7 @@ class Product extends Model
     use SoftDeletes;
 
     const PRODUCTO_DISPONIBLE='disponible';
-    CONST PRODUCTO_NO_DISPONIBLE='no disponible';
-    
+    const PRODUCTO_NO_DISPONIBLE='no disponible';
     protected $dates = ['deleted_at'];
     protected $fillable=[
         'name',
@@ -23,6 +23,8 @@ class Product extends Model
         'image',
         'seller_id'
     ];
+    //public $timestamps = false;
+    const UPDATED_AT = null;
     protected $hidden =[
         'pivot'
     ];
@@ -39,5 +41,26 @@ class Product extends Model
     }
     public function transactions(){
         return $this->hasMany(Transaction::class);
+    }
+    public function setNameAttribute($valor){
+        $this->attributes['name'] = strtolower($valor);
+    }
+/*     public function setCreatedAtAttribute($date) {
+        $this->attributes['created_at'] = Carbon::parse($date)->format('M j Y h:i:s');
+    }
+    public function setUpdatedAttribute($date) {
+        $this->attributes['updated_at'] = Carbon::parse($date)->format('M j Y h:i:s');
+    }
+    public function setDeletedAttribute($date) {
+        $this->attributes['deleted_at'] = Carbon::parse($date)->format('M j Y h:i:s');
+    }
+    public function getCreatedAtAttribute($date) {
+        return  Carbon::parse($date)->format('M j Y h:i:s');
+    }
+    public function getUpdatedAttribute($date) {
+        return Carbon::parse($date)->format('M j Y h:i:s');
+    }
+   */ public function getDeletedAttribute($date) {
+        return Carbon::parse($date)->format('M j Y h:i:s');
     }
 }
