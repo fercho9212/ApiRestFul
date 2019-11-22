@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $table ='users';
     protected $dates = ['deleted_at'];
 
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -33,17 +34,6 @@ class User extends Authenticatable
         'verification_token',
         'admin',
     ];
-
-    public function setNameAttribute($valor){
-        $this->attributes['name'] = strtolower($valor);
-    }
-    public function getNameAttribute($valor){
-        return ucfirst($valor);
-    }
-    public function setEmailAttribute($valor){
-        $this->attributes['email'] = strtolower($valor);
-    }
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -54,6 +44,15 @@ class User extends Authenticatable
         'remember_token',
         'verification'
     ];
+    public function setNameAttribute($valor){
+        $this->attributes['name'] = strtolower($valor);
+    }
+    public function getNameAttribute($valor){
+        return ucfirst($valor);
+    }
+    public function setEmailAttribute($valor){
+        $this->attributes['email'] = strtolower($valor);
+    }
 
     public function esVerificado(){
         return $this->verified==User::USUARIO_VERIFICADO;
@@ -61,7 +60,7 @@ class User extends Authenticatable
     public function esAdministrador(){
         return $this->admin=User::USUARIO_ADMINISTRADOR;
     }
-    public static function generarVerificacionToken(){
+    public static function generarVerificationToken(){
         return str_random(40);
     }
     /**

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\ApiController;
 
-class UserControler extends ApiController
+class UserController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -33,6 +33,8 @@ class UserControler extends ApiController
         $campos['password']             = bcrypt($request->password);
         $campos['verified']             = User::USUARIO_NO_VERIFICADO;
         $campos['cerification_token']   = User::USUARIO_REGULAR;
+        $campos['verification_token']   = User::generarVerificationToken();
+        $campos['admin']                = User::USUARIO_REGULAR;
         $usuario    = User::create($campos);
         return  $this->showOne($usuario,201);
     }
@@ -94,5 +96,13 @@ class UserControler extends ApiController
     {
         $user->delete();
         return $this->showOne($user);
+    }
+
+    public function verify($token){
+        $user=User::where('verification_token',$token)->firstOrFail();
+        $user->verified=User::USUARIO_VERIFICADO;
+        $user->save();
+        return $this->showMessage('La cuenta ha sido verificada');
+
     }
 }

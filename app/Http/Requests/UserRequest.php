@@ -42,10 +42,8 @@ class UserRequest extends FormRequest
     {
         return [
             'name'              =>'required|string|min:3',
-            'email'             =>'required|string|min:3|unique|users',
+            'email'             =>'required|string|min:3|unique:users',
             'password'          =>'required|string',
-            'verified'          =>'required|string',
-            'admin'             =>'required|string'
         ];
     }
     public function methodPut()
