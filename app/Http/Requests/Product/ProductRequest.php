@@ -50,7 +50,6 @@ class ProductRequest extends FormRequest
     public function methodPut()
     {
         return [
-            'quantity'          =>'required|numeric|min:1',
             'status'            => Rule::in([Product::PRODUCTO_DISPONIBLE,Product::PRODUCTO_NO_DISPONIBLE]),
             'image'             =>'image'
         ];
