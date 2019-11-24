@@ -26,7 +26,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'password'              => $password ?: $password = bcrypt('secret'),
         'remember_token'        => Str::random(10),
         'verified'              => $verificado = $faker->randomElement([User::USUARIO_VERIFICADO,USER::USUARIO_NO_VERIFICADO]),
-        'verification_token'    => $verificado == User::USUARIO_VERIFICADO ? null : User::generarVerificacionToken(),
+        'verification_token'    => $verificado == User::USUARIO_VERIFICADO ? null : User::generarVerificationToken(),
         'admin'                 => $faker->randomElement([USER::USUARIO_ADMINISTRADOR,USER::USUARIO_REGULAR])
     ];
 });

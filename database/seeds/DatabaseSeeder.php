@@ -24,10 +24,15 @@ class DatabaseSeeder extends Seeder
         User::truncate();
         Transaction::truncate(); */
         // $this->call(UsersTableSeeder::class);
-        $cantidadUsuarios       = 1000;
+        User::flushEventListeners();        //SE REALIZA CON EL FIN DE EVITAR EL ENVIO DE CORREOS
+        Category::flushEventListeners();    //AL MOMENTO DE ACTIVAR LOS SEEDER
+        Product::flushEventListeners();
+        Transaction::flushEventListeners();
+
+        $cantidadUsuarios       = 500;
         $cantidadCategories     = 50;
-        $cantidadProducts       = 1000;
-        $cantidadTransacciones  = 1000;
+        $cantidadProducts       = 500;
+        $cantidadTransacciones  = 500;
 
         factory(User::class,$cantidadUsuarios)->create();
         factory(Category::class,$cantidadCategories)->create();
