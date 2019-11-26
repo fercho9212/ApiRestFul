@@ -6,12 +6,13 @@ use App\Category;
 use Carbon\Carbon;
 use App\Transaction;
 use Illuminate\Database\Eloquent\Model;
+use App\Transformers\ProductTransformer;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use SoftDeletes;
-
+    public $transformer = ProductTransformer::class;
     const PRODUCTO_DISPONIBLE='disponible';
     const PRODUCTO_NO_DISPONIBLE='no disponible';
     protected $dates = ['deleted_at'];
