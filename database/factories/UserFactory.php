@@ -32,14 +32,14 @@ $factory->define(App\User::class, function (Faker $faker) {
 });
 $factory->define(App\Category::class, function (Faker $faker) {
     return [
-        'name' => $faker->word,
+        'name' => $faker->state,
         'description' =>$faker->paragraph(1),
     ];
 });
 
 $factory->define(App\Product::class, function (Faker $faker) {
     return [
-        'name'        =>    $faker->word,
+        'name'        =>    $faker->userName,
         'description' =>    $faker->paragraph(1),
         'quantity'    =>    $faker->numberBetween(1,10),
         'status'      =>    $faker->randomElement([Product::PRODUCTO_DISPONIBLE,Product::PRODUCTO_NO_DISPONIBLE]),

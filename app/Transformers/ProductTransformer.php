@@ -34,8 +34,8 @@ class ProductTransformer extends TransformerAbstract
     {
         return [
             'identificador'     =>  (int)$product->id,
-            'titulo'            =>  (string)$product->quantity,
-            'detalles'          =>  (string)$product->descripcion,
+            'titulo'            =>  (string)$product->name,
+            'detalles'          =>  (string)$product->description,
             'disponibles'       =>  (string)$product->quantity,
             'estado'            =>  (string)$product->status,
             'imagen'            =>   url("img/{$product->image}"),
@@ -44,5 +44,23 @@ class ProductTransformer extends TransformerAbstract
             'fechaActualizacion'=>  (string)$product->updated_at,
             'fechaEliminacion'  =>  isset($product->deleted_at) ? (string)$product->delete_at:null,
         ];
+    }
+
+    public static function originalAttribute($index){
+
+        $attributes = [
+            'identificador'     =>  'id',
+            'titulo'            =>  'quantity',
+            'detalles'          =>  'descripcion',
+            'disponibles'       =>  'quantity',
+            'estado'            =>  'status',
+            'imagen'            =>  'image',
+            'vendedor'          =>  'seller_id',
+            'fechaCreacion'     =>  'created_at',
+            'fechaActualizacion'=>  'updated_at',
+            'fechaEliminacion'  =>  'deleted_at'
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
     }
 }
