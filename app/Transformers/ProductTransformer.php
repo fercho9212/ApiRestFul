@@ -50,8 +50,8 @@ class ProductTransformer extends TransformerAbstract
 
         $attributes = [
             'identificador'     =>  'id',
-            'titulo'            =>  'quantity',
-            'detalles'          =>  'descripcion',
+            'titulo'            =>  'name',
+            'detalles'          =>  'description',
             'disponibles'       =>  'quantity',
             'estado'            =>  'status',
             'imagen'            =>  'image',
