@@ -82,4 +82,18 @@ class BuyerTransformer extends TransformerAbstract
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+    //Se transforma para los mensajes de validacion
+    public static function transformedlAtrribute($index){
+        $attributes = [
+            'id'        =>'identificador',
+            'name'      =>'nombre',
+            'email'     =>'correo',
+            'verified'  =>'esVerificado',
+            'admin'     =>'esAdministrador',
+            'created_at'=>'fechaCracion',
+            'update_at' =>'fechaActualización',
+            'delete_at' =>'fechaEliminación'
+        ];
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

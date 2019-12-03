@@ -70,7 +70,7 @@ class SellerTransformer extends TransformerAbstract
         ];
     }
 
-    public static function originalAtrribute($index){
+    public static function originalAttribute($index){
         $attributes = [
             'identificador'     =>  'id',
             'nombre'            =>  'name',
@@ -80,6 +80,20 @@ class SellerTransformer extends TransformerAbstract
             'fechaCracion'      =>  'created_at',
             'fechaActualización'=>  'update_at',
             'fechaEliminación'  =>  'delete_at'
+        ];
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+ //Se transforma para los mensajes de validacion
+    public static function transformedAttribute(){
+        $attributes = [
+            'id'        =>'identificador',
+            'name'      =>'nombre',
+            'email'     =>'correo',
+            'verified'  =>'esVerificado',
+            'admin'     =>'esAdministrador',
+            'created_at'=>'fechaCracion',
+            'update_at' =>'fechaActualización',
+            'delete_at' =>'fechaEliminación'
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }

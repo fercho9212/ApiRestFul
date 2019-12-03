@@ -77,4 +77,17 @@ class TransactionTransformer extends TransformerAbstract
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+    //Se transforma para los mensajes de
+    public static function transformedAttribute($index){
+        $attributes = [
+            'id'         => 'identificador',
+            'quantity'   => 'cantidad',
+            'buller_id'  => 'comprador',
+            'product_id' => 'producto',
+            'created_at' => 'fechaCracion',
+            'update_at'  => 'fechaActualizacion',
+            'deleted_at' => 'fechaEliminacion',
+        ];
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }
