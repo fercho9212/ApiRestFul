@@ -15,3 +15,23 @@
     return view('welcome');
 });
   */
+  $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+  $this->post('login', 'Auth\LoginController@login');
+  $this->post('logout', 'Auth\LoginController@logout')->name('logout');
+
+
+
+  // Password Reset Routes...
+  if ($options['reset'] ?? true) {
+      $this->resetPassword();
+  }
+
+  // Email Verification Routes...
+  if ($options['verify'] ?? false) {
+      $this->emailVerification();
+  }
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', function(){
+  return view('welcome');
+})->middleware('guest');

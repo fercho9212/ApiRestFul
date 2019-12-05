@@ -6,7 +6,9 @@ use Exception;
 use App\Traits\ApiResponser;
 use Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -70,12 +72,8 @@ class Handler extends ExceptionHandler
             return $this->unauthenticated($request, $exception);
         }
 
-        if ($exception instanceof AuthenticationException) {
+        if ($exception instanceof AuthorizationException) {
             return $this->errorResponse('No posee permisos para ejecutar esta accion',403);
-        }
-
-        if ($exception instanceof NotFoundHttpException) {
-            return $this->errorResponse('No se encontro la URL especificada',404);
         }
 
         if ($exception instanceof NotFoundHttpException) {
@@ -101,21 +99,39 @@ class Handler extends ExceptionHandler
             }
         }
 
-/*         if(config('app.debug')){
+/*        if(config('app.debug')){
             return $this->errorResponse('Falla Inesperada. Intente más adelante',500);
         } */
+
+        if($exception instanceof TokenMismatchException){
+            return redirect()->back()->withInput($request->input());
+        }
         return parent::render($request, $exception);
     }
 
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
     {
-        $errors=$e->validator->errors()->getMessages();
+        $errors = $e->validator->errors()->getMessages();
+        if($this->isFronted($request)){
+            return $request->ajax() ? response()->json($errors,422) : redirect()
+                                                                    ->back()
+                                                                    ->withInput($request->input())
+                                                                    ->withErrors($errors);
+        }
         return $this->errorResponse($errors,422);
     }
 
     protected function unauthenticated($request, AuthenticationException $exception)
     {
+        if($this->isFronted($request)){
+            return redirect()->guest('login');
+        }
         return $this->errorResponse('No autenticado.',401);
+    }
+    //Funcion que permite saber si la peticion es realizada desde el modo fronted
+    private function isFronted($request)
+    {
+        return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
     }
 
 }
