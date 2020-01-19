@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
+use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -24,7 +26,12 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+        Passport::routes();
+        Passport::tokensExpireIn(Carbon::now()->addMinutes(30));
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
+        //Passport::enableImplicitGrant();
+        //eS RECOMENDADO MANTENERDO DESAHBILITADO YA QUE
+        //POR SEGURIDAD ES IMPORTANTO HABILITARLO SI EL CLIENTE NO CUENTA
+        //CON SISMTEA DE REFRESH TOKEN Passport::enableImplicitGrant();
     }
 }
