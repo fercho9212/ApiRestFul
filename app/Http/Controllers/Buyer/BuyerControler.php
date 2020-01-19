@@ -13,6 +13,11 @@ class BuyerControler extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        parent::__construct();
+        $this->middleware('scope:read-general')->only('show');
+    }
+
     public function index()
     {
         $compradores=Buyer::has('transactions')->get();  //has recibe el nombre de la relacion

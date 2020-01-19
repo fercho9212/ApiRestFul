@@ -13,6 +13,10 @@ class TransactionSellerController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        parent::__construct();
+        $this->middleware('scope:read-general')->only('index');
+    }
     public function index(Transaction $transaction)
     {
         $seller=$transaction->product->seller;

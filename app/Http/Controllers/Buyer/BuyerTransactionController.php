@@ -8,6 +8,10 @@ use App\Http\Controllers\ApiController;
 
 class BuyerTransactionController extends ApiController
 {
+    public function __construct(){
+        parent::__construct();
+        $this->middleware('scope:read-general')->only('index');
+    }
     /**
      * Display a listing of the resource.
      *

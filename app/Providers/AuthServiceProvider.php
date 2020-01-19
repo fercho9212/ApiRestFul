@@ -33,5 +33,15 @@ class AuthServiceProvider extends ServiceProvider
         //eS RECOMENDADO MANTENERDO DESAHBILITADO YA QUE
         //POR SEGURIDAD ES IMPORTANTO HABILITARLO SI EL CLIENTE NO CUENTA
         //CON SISMTEA DE REFRESH TOKEN Passport::enableImplicitGrant();
+
+        //scopes
+        Passport::tokensCan([
+            'purchase-product' => 'Crear Transacciones para comprar productos determinados',
+            'manage-products'  => 'Crear, ver, actualizar y eliminar productos',
+            'manage-account'   => 'Obtener la informacion de la cuenta,nombre, email, estado
+                                    (Sin contraseña),modificar los datos como email.nombre y contraseña . NO se puede eliminar la cuenta',
+            'read-general'     => 'Obtener la infromacion general, categorias donde se compra y se vende, productos vendidos
+                                   o comprados,transacciones,compreas y ventas',
+        ]);
     }
 }

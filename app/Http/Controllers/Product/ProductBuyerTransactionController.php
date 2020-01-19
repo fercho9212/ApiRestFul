@@ -15,6 +15,7 @@ class ProductBuyerTransactionController extends ApiController
     public function __construct(){
         parent::__construct();
         $this->middleware('transform.input:'.TransactionTransformer::class);
+        $this->middleware('scope:purchase-product')->only('store');
     }
     /**
      * Store a newly created resource in storage.
@@ -42,6 +43,7 @@ class ProductBuyerTransactionController extends ApiController
         if($product->quantity < $request->quantity){
             return $this->errorResponse('El producto no tiene la cantidad disponible requerida para esta trabsacción',409);
         }
+       
         return DB::transaction(function() use ($request,$product,$buyer){
             $product->quantity  -= $request->quantity;
             $product->save();
