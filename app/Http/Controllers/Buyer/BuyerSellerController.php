@@ -15,6 +15,7 @@ class BuyerSellerController extends ApiController
      */
     public function index(Buyer $buyer)
     {
+        $this->allowedAdminAction();
         //$seller=$buyer->transations->product->seller;
         $sellers=$buyer->transactions()
                        ->with('product.seller') //Get relations between product and seller 

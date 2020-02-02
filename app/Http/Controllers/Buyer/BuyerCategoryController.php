@@ -11,6 +11,7 @@ class BuyerCategoryController extends ApiController
     public function __construct(){
         parent::__construct();
         $this->middleware('scope:read-general')->only('index');
+        $this->middleware('can:view,buyer')->only('index'); //can:view permiso buyer instaciona del Police BUyer
     }
     /**
      * Display a listing of the resource.
@@ -19,12 +20,15 @@ class BuyerCategoryController extends ApiController
      */
     public function index(Buyer $buyer)
     {
+        
         $categories=$buyer->transactions()
                           ->with('product.categories')
                           ->get()
                           ->pluck('product.categories')
+                          ->collapse()
                           ->unique()
                           ->values();
+                          
         return $this->showAll($categories);
     }
 

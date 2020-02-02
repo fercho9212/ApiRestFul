@@ -6,6 +6,7 @@ use App\User;
 use App\Mail\UserCreated;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use App\Transformers\UserTransformer;
 use App\Http\Controllers\ApiController;
@@ -17,6 +18,9 @@ class UserController extends ApiController
         $this->middleware('auth:api')->except(['store','resend','verify']);
         $this->middleware('transform.input'.UserTransformer::class)->only(['store,update']);
         $this->middleware('scope:manage-account')->only(['show','update']);
+        $this->middleware('can:view,user')->only('show');
+        $this->middleware('can:view,user')->only('update');
+        $this->middleware('can:view,user')->only('destroy');
     }
     /**
      * Display a listing of the resource.
@@ -25,6 +29,7 @@ class UserController extends ApiController
      */
     public function index()
     {
+        $this->allowedAdminAction();
         $usuarios = User::all();
         return $this->showAll($usuarios);
         //return $usuarios;
@@ -81,6 +86,7 @@ class UserController extends ApiController
             $user->password=bcrypt($request->password);
         }
         if($request->has('admin')){
+            $this->allowedAdminAction();
            if(!$user->esVerificado()){
                return  $this->errorResponse('Unicamente los usuarios
                verificados pueden cambiar el valor',409);
@@ -103,6 +109,7 @@ class UserController extends ApiController
      */
     public function destroy(User $user)
     {
+        $this->allowedAdminAction();
         $user->delete();
         return $this->showOne($user);
     }

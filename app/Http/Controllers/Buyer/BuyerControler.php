@@ -16,10 +16,12 @@ class BuyerControler extends ApiController
     public function __construct(){
         parent::__construct();
         $this->middleware('scope:read-general')->only('show');
+        $this->middleware('can:view,buyer')->only('show'); //can:view permiso buyer instaciona del Police BUyer
     }
 
     public function index()
     {
+        $this->allowedAdminAction();
         $compradores=Buyer::has('transactions')->get();  //has recibe el nombre de la relacion
         return $this->showAll($compradores);
     }
