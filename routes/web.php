@@ -15,25 +15,26 @@
     return view('welcome');
 });
   */
-  $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-  $this->post('login', 'Auth\LoginController@login');
-  $this->post('logout', 'Auth\LoginController@logout')->name('logout');
+  Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+  Route::post('login', 'Auth\LoginController@login');
+  Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 
 
-  // Password Reset Routes...
+
+ // Password Reset Routes...
   if ($options['reset'] ?? true) {
-      $this->resetPassword();
+      Route::resetPassword();
   }
 
   // Email Verification Routes...
   if ($options['verify'] ?? false) {
-      $this->emailVerification();
+      Route::emailVerification();
   }
 
 Route::get('/home/my-tokens', 'HomeController@getTokens')
   ->name('personal-tokens');
-Route::get('/home/my-clients', 'HomeController@getClients')
+Route::get('/home/myRoute::s', 'HomeController@getClients')
   ->name('personal-clients');
 Route::get('/home/authorized-clients', 'HomeController@getAuthorizedClients')
   ->name('authorized-clients');

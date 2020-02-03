@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use App\Transformers\UserTransformer;
 use Illuminate\Notifications\Notifiable;
@@ -65,7 +66,7 @@ class User extends Authenticatable
         return $this->admin==User::USUARIO_ADMINISTRADOR;
     }
     public static function generarVerificationToken(){
-        return str_random(40);
+        return Str::random(40);
     }
     /**
      * The attributes that should be cast to native types.
